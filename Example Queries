@@ -1,0 +1,41 @@
+1. Total Sales per Customer
+
+SELECT c.customer_name, SUM(o.total_amount) AS total_sales
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_name;
+
+
+2. Top 3 Products by Stock Levels
+
+SELECT product_name, stock_level
+FROM products
+ORDER BY stock_level DESC
+LIMIT 3;
+
+
+3. Monthly Sales Trends
+
+SELECT EXTRACT(MONTH FROM order_date) AS month, SUM(total_amount) AS total_sales
+FROM orders
+GROUP BY month
+ORDER BY month;
+
+
+4. Inventory Turnover Rate
+
+SELECT p.product_name, i.stock_added, p.stock_level, 
+       (i.stock_added - p.stock_level) / p.stock_level * 100 AS turnover_rate
+FROM products p
+JOIN inventory i ON p.product_id = i.product_id;
+
+5. Best-Selling Product Category
+
+SELECT p.category, SUM(o.total_amount) AS category_sales
+FROM products p
+JOIN orders o ON p.product_id = o.product_id
+GROUP BY p.category
+ORDER BY category_sales DESC
+LIMIT 1;
+
+
