@@ -1,0 +1,66 @@
+1. Customers Table
+
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    customer_name VARCHAR(255),
+    customer_type VARCHAR(50), -- 'Individual' or 'Business'
+    contact_number VARCHAR(20),
+    city VARCHAR(100),
+    country VARCHAR(100)
+);
+
+2. Orders Table
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    total_amount DECIMAL(10, 2),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+
+3. Products Table
+
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(255),
+    category VARCHAR(100),
+    price DECIMAL(10, 2),
+    stock_level INT
+);
+
+4. Inventory Table
+
+CREATE TABLE inventory (
+    inventory_id INT PRIMARY KEY,
+    product_id INT,
+    stock_added INT,
+    restock_date DATE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+Data Insertion
+
+INSERT INTO customers (customer_id, customer_name, customer_type, contact_number, city, country) VALUES
+(1, 'John Doe', 'Individual', '+1-555-1234', 'New York', 'USA'),
+(2, 'Acme Corporation', 'Business', '+1-555-9876', 'Los Angeles', 'USA'),
+(3, 'Jane Smith', 'Individual', '+44-555-5678', 'London', 'UK');
+
+
+
+INSERT INTO orders (order_id, customer_id, order_date, total_amount) VALUES
+(1001, 1, '2023-07-15', 500.00),
+(1002, 2, '2023-07-20', 1500.00),
+(1003, 3, '2023-08-05', 300.00);
+
+
+INSERT INTO products (product_id, product_name, category, price, stock_level) VALUES
+(1, 'Laptop', 'Electronics', 800.00, 50),
+(2, 'Smartphone', 'Electronics', 500.00, 150),
+(3, 'Desk Chair', 'Furniture', 200.00, 20);
+
+
+INSERT INTO inventory (inventory_id, product_id, stock_added, restock_date) VALUES
+(1, 1, 20, '2023-07-01'),
+(2, 2, 100, '2023-06-25'),
+(3, 3, 10, '2023-08-01');
