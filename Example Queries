@@ -22,6 +22,19 @@ GROUP BY month
 ORDER BY month;
 
 
+SELECT EXTRACT(WEEK FROM order_date) AS week, SUM(total_amount) AS total_sales
+FROM orders
+GROUP BY week
+ORDER BY week;
+
+
+SELECT EXTRACT(DAY FROM order_date) AS day, SUM(total_amount) AS total_sales
+FROM orders
+GROUP BY day
+ORDER BY day;
+
+
+
 4. Inventory Turnover Rate
 
 SELECT p.product_name, i.stock_added, p.stock_level, 
